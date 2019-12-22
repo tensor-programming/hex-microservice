@@ -39,7 +39,7 @@ func main() {
 
 	errs := make(chan error, 2)
 	go func() {
-		fmt.Println("Listening on port :8000")
+		fmt.Println("Listening on port ", httpPort)
 		errs <- http.ListenAndServe(httpPort(), r)
 
 	}()
@@ -63,7 +63,7 @@ func httpPort() string {
 }
 
 func chooseRepo() shortener.RedirectRepository {
-	switch os.Getenv("URL_DB") {
+	switch strings.ToLower(os.Getenv("URL_DB")) {
 	case "redis":
 		redisURL := os.Getenv("REDIS_URL")
 		repo, err := rr.NewRedisRepository(redisURL)
