@@ -63,7 +63,13 @@ func httpPort() string {
 }
 
 func chooseRepo() shortener.RedirectRepository {
-	switch os.Getenv("URL_DB") {
+	urlDB := os.Getenv("URL_DB")
+	if urlDB == "" {
+		log.Fatal("env URL_DB not set")
+		return nil
+	}
+
+	switch urlDB {
 	case "redis":
 		redisURL := os.Getenv("REDIS_URL")
 		repo, err := rr.NewRedisRepository(redisURL)
