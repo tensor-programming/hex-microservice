@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +9,9 @@ import (
 	"strconv"
 	"syscall"
 
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
+	"github.com/joho/godotenv"
 	h "github.com/tensor-programming/hex-microservice/api"
 	mr "github.com/tensor-programming/hex-microservice/repository/mongo"
 	rr "github.com/tensor-programming/hex-microservice/repository/redis"
@@ -24,6 +25,10 @@ import (
 // repo <- service -> serializer  -> http
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	repo := chooseRepo()
 	service := shortener.NewRedirectService(repo)
 	handler := h.NewHandler(service)

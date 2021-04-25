@@ -9,6 +9,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/jakm/msgpack-cli v0.0.0-20161211155839-006c2f6bdcb0 // indirect
+	github.com/joho/godotenv v1.3.0 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.3.0
